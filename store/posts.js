@@ -21,7 +21,7 @@ export const actions = {
             .catch(error => console.log(error))
     },
     DELETE_POST({ commit, state }, id){
-       this.$axios.$delete(`https://jsonplaceholder.typicode.com/posts/asfgas`)
+       this.$axios.$delete(`https://jsonplaceholder.typicode.com/posts/${id}`)
             .then(() => {
                 const posts = state.posts.slice()
                 posts.forEach(e => {
