@@ -8,6 +8,9 @@ export const mutations = {
     
     
 };
+export const getters = {
+    GET_POST: state => state.posts
+};
 
 export const actions = {
     GET_POST({ commit }) {
@@ -15,21 +18,26 @@ export const actions = {
             .then(response => {
                 commit('SET_POSTS', response)
             })
-            .catch(json => console.log(json))
+            .catch(error => console.log(error))
     },
     DELETE_POST({ commit, state }, id){
-       const posts = state.posts.slice()
-       posts.forEach(e => {
-           if (e.id == id) {
-               const index = posts.indexOf(e)
-               if (index < 0) {
-                   return
-               }
-               posts.splice(index, 1)
-               commit('SET_POSTS', posts)
-               
-               return
-           }
-       }); 
+       this.$axios.$delete(`https://jsonplaceholder.typicode.com/posts/asfgas`)
+            .then(() => {
+                const posts = state.posts.slice()
+                posts.forEach(e => {
+                    if (e.id == id) {
+                        const index = posts.indexOf(e)
+                        if (index < 0) {
+                            return
+                        }
+                        posts.splice(index, 1)
+                        commit('SET_POSTS', posts)
+                        
+                        return 
+                    }
+                }); 
+            })
+            .catch(error => console.log(error))
+            
     }
 }
