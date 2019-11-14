@@ -8,6 +8,7 @@ export const mutations = {
     
     
 };
+
 export const actions = {
     GET_POST({ commit }) {
         return this.$axios.$get('https://jsonplaceholder.typicode.com/posts')
